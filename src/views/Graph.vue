@@ -42,11 +42,10 @@ export default {
       }]
     };
 
-    axios.get('/api/webkit')
+    axios.get('/api/graph/default')
       .then((response) => {
         let webkit = response.data;
         this.graphOpts = {
-          theme: 'dark',
           legend: {
             data: webkit.categories.map(function (node) {
               return node.name;
@@ -61,8 +60,13 @@ export default {
             data: webkit.nodes,
             categories: webkit.categories,
             links: webkit.links,
-            label: { position: 'right' },
-            force: { edgeLength: 180 },
+            label: {
+              position: 'right',
+            },
+            force: {
+              edgeLength: 160,
+              repulsion: 80,
+            },
           }]
         };
       })

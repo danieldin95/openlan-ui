@@ -11,18 +11,18 @@ import (
 )
 
 type Server struct {
-	listen     string
-	server     *http.Server
-	crtFile    string
-	keyFile    string
-	pubDir     string
-	router     *mux.Router
+	listen  string
+	server  *http.Server
+	crtFile string
+	keyFile string
+	pubDir  string
+	router  *mux.Router
 }
 
 func NewServer(listen, staticDir string) (h *Server) {
 	h = &Server{
-		listen:    listen,
-		pubDir:    staticDir,
+		listen: listen,
+		pubDir: staticDir,
 	}
 	return
 }
@@ -39,9 +39,14 @@ func (h *Server) LoadRouter() {
 	router := h.Router()
 	router.Use(h.Middleware)
 
-	// static files
+	// Api router
 	api.VSwitch{}.Router(router)
 	api.User{}.Router(router)
+	api.Point{}.Router(router)
+	api.Link{}.Router(router)
+	api.Graph{}.Router(router)
+	// static files
+	Dist{h.pubDir}.Router(router)
 }
 
 func (h *Server) SetCert(keyFile, crtFile string) {

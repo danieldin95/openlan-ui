@@ -6,8 +6,8 @@ import (
 )
 
 type Service struct {
-	Users      Users
-	VSwitch    VSwitch
+	Users   Users
+	VSwitch VSwitch
 }
 
 var SERVICE = Service{

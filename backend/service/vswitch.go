@@ -7,8 +7,8 @@ import (
 )
 
 type VSwitch struct {
-	Lock  sync.RWMutex
-	File  string
+	Lock    sync.RWMutex
+	File    string
 	VSwitch map[string]*schema.VSwitch `json:"vswitch"`
 }
 
@@ -37,6 +37,7 @@ func (v *VSwitch) Load(file string) error {
 		if value.Name == "" {
 			value.Name = name
 		}
+		value.Init()
 	}
 	return nil
 }
