@@ -6,6 +6,7 @@ type Point struct {
 	Tenant string `json:"tenant"`
 	Server string `json:"server"`
 	Uptime int64  `json:"uptime"`
-	Status string `json:"status"`
-	IfName string `json:"interface"`
+	State  string `json:"state"`
+	Device string `json:"device"`
+	Switch string `json:"switch"`
 }

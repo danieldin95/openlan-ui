@@ -1,7 +1,6 @@
 <template>
   <div class="graph">
-    <h1>This is an Graph page</h1>
-    <ECharts :theme="theme" :options="lineOpts" :autoresize="true"></ECharts>
+    <h1>OpenLAN Topology</h1>
     <ECharts :theme="theme" :options="graphOpts" :autoresize="true"></ECharts>
   </div>
 </template>
@@ -20,59 +19,41 @@ export default {
     return {
       lineOpts: {},
       graphOpts: {},
-      theme: 'default',
+      theme: 'dark',
     };
   },
   created() {
-    console.log('Graph.created');
-  },
-  mounted() {
-    this.lineOpts = {
-      xAxis: {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [{
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line',
-        smooth: true
-      }]
-    };
-
-    axios.get('/api/graph/default')
-      .then((response) => {
-        let webkit = response.data;
-        this.graphOpts = {
-          legend: {
-            data: webkit.categories.map(function (node) {
-              return node.name;
-            })
+    axios.get('/api/graph/default').then((response) => {
+      let webkit = response.data;
+      this.graphOpts = {
+        legend: {
+          data: webkit.categories.map(function (node) {
+            return node.name;
+          })
+        },
+        series: [{
+          type: 'graph',
+          layout: 'force',
+          roam: true,
+          draggable: true,
+          animation: true,
+          focusNodeAdjacency: true,
+          data: webkit.nodes,
+          categories: webkit.categories,
+          links: webkit.links,
+          label: {
+            position: 'right',
+            show: true,
           },
-          series: [{
-            type: 'graph',
-            layout: 'force',
-            roam: true,
-            draggable: true,
-            focusNodeAdjacency: true,
-            data: webkit.nodes,
-            categories: webkit.categories,
-            links: webkit.links,
-            label: {
-              position: 'right',
-            },
-            force: {
-              edgeLength: 160,
-              repulsion: 80,
-            },
-          }]
-        };
-      })
-      .catch((error) => {
-        console.log(`Error! Could not reach the API: ${error}`);
-      });
+          force: {
+            edgeLength: 160,
+            repulsion: 400,
+          },
+        }]
+      };
+    }).catch((error) => {
+      console.log(`GET /api/graph/default: ${error}`);
+    });
   }
 };
 </script>
