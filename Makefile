@@ -23,8 +23,8 @@ linux/rpm: linux/rpm/serve
 
 linux/rpm/serve:
 	./packaging/auto.sh
-	rpmbuild -ba packaging/openlan-ui.spec
-	cp -rvf ~/rpmbuild/RPMS/x86_64/openlan-ui-*.rpm .
+	rpmbuild -ba packaging/openlan-serve.spec
+	cp -rvf ~/rpmbuild/RPMS/x86_64/openlan-serve-*.rpm .
 
 
 test:
