@@ -2,7 +2,7 @@
   <el-container>
     <el-header>
       <el-card class="box-card">
-        <span style="font-size: smaller;">Accessed Point</span>
+        <span style="font-size: smaller;">Virtual Switch</span>
         <el-divider direction="vertical"></el-divider>
         <el-dropdown>
           <i class="el-icon-setting"></i>
@@ -15,22 +15,23 @@
       </el-card>
     </el-header>
     <el-main>
-      <div class="point">
-        <PointList/>
+      <div class="home">
+        <VSwitchList/>
       </div>
     </el-main>
   </el-container>
 </template>
 
 <script>
-import PointList from '../components/PointList.vue';
+import VSwitchList from "../components/VSwitchList";
 
 export default {
-  name: 'Point',
+  name: 'Home',
   components: {
-    PointList
+    VSwitchList,
   }
 };
 </script>
+
 <style scoped>
 </style>

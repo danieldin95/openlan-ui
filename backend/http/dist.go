@@ -26,6 +26,11 @@ func (s Dist) Router(router *mux.Router) {
 	cssFile := http.StripPrefix("/css/", http.FileServer(cssDir))
 	router.PathPrefix("/css/").Handler(cssFile)
 
+	// fonts
+	fontsDir := http.Dir(s.Dir + "/fonts")
+	fontsFile := http.StripPrefix("/fonts/", http.FileServer(fontsDir))
+	router.PathPrefix("/fonts/").Handler(fontsFile)
+
 	// root
 	router.HandleFunc("/", s.Ui)
 	router.HandleFunc("/dist", s.Ui)

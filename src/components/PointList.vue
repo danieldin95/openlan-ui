@@ -1,12 +1,14 @@
 <template>
-  <div class="point">
+  <el-card class="point box-card">
     <el-table
             :data="tableData"
             stripe
-            style="width: 100%">
+            style="width: 100%"
+            :default-sort = "{prop: 'uptime', order: 'ascending'}">
       <el-table-column
               prop="uptime"
               label="UpTime"
+              sortable
               width="100">
       </el-table-column>
       <el-table-column
@@ -17,11 +19,13 @@
       <el-table-column
               prop="switch"
               label="Switch"
+              sortable
               width="200">
       </el-table-column>
       <el-table-column
               prop="tenant"
               label="Tenant"
+              sortable
               width="100">
       </el-table-column>
       <el-table-column
@@ -32,14 +36,14 @@
       <el-table-column
               prop="device"
               label="Device"
-              width="100">
+              width="120">
       </el-table-column>
       <el-table-column
               prop="state"
               label="State">
       </el-table-column>
     </el-table>
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -65,6 +69,5 @@ export default {
 <style scoped>
 .point {
   margin: 0 auto;
-  max-width: 1024px;
 }
 </style>

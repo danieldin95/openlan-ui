@@ -17,6 +17,7 @@ type Server struct {
 	keyFile string
 	pubDir  string
 	router  *mux.Router
+	token   string
 }
 
 func NewServer(listen, staticDir string) (h *Server) {
@@ -55,6 +56,10 @@ func (h *Server) SetCert(keyFile, crtFile string) {
 }
 
 func (h *Server) Initialize() {
+	if h.token == "" {
+		h.token = libstar.GenToken(32)
+	}
+	libstar.Info("Server.Initialize token %s", h.token)
 	r := h.Router()
 	if h.server == nil {
 		h.server = &http.Server{
@@ -66,11 +71,13 @@ func (h *Server) Initialize() {
 }
 
 func (h *Server) IsAuth(w http.ResponseWriter, r *http.Request) bool {
-	// not need to auth.
-	if r.URL.Path != "/api" {
-		return true
+	token, pass, ok := r.BasicAuth()
+	libstar.Debug("Server.IsAuth token: %s, pass: %s", token, pass)
+	if !ok || token != h.token {
+		w.Header().Set("WWW-Authenticate", "Basic")
+		http.Error(w, "Authorization Required.", http.StatusUnauthorized)
+		return false
 	}
-
 	return true
 }
 
@@ -95,7 +102,6 @@ func (h *Server) Middleware(next http.Handler) http.Handler {
 			next.ServeHTTP(w, r)
 		} else {
 			w.Header().Set("WWW-Authenticate", "Basic")
-			http.Error(w, "Authorization Required", http.StatusUnauthorized)
 		}
 	})
 }

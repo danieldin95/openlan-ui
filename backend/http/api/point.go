@@ -6,7 +6,6 @@ import (
 	"github.com/danieldin95/openlan-ui/backend/service"
 	"github.com/gorilla/mux"
 	"net/http"
-	"sort"
 )
 
 type Point struct {
@@ -35,28 +34,25 @@ func (p Point) GET(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 		}
-
 	} else {
 		vs, ok := service.SERVICE.VSwitch.Get(id)
 		if !ok {
-			http.Error(w, "not found", http.StatusNotFound)
+			http.Error(w, "switch not found", http.StatusNotFound)
 			return
 		}
 		vc, ok := vs.Ctl.(*ctl.VSwitch)
 		if !ok {
-			http.Error(w, "not found", http.StatusNotFound)
+			http.Error(w, "ctl not found", http.StatusNotFound)
 			return
 		}
 		for h := range vc.ListPoint() {
 			if h == nil {
 				break
 			}
+			h.Switch = vs.Name
 			ps = append(ps, *h)
 		}
 	}
-	sort.SliceStable(ps, func(i, j int) bool {
-		return ps[i].Switch+ps[i].Alias < ps[j].Switch+ps[j].Alias
-	})
 	ResponseJson(w, ps)
 }
 

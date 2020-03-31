@@ -11,6 +11,11 @@ const routes = [
     component: Home
   },
   {
+    path: '/vswitch',
+    name: 'VSwitch',
+    component: () => import('../views/VSwitch.vue')
+  },
+  {
     path: '/point',
     name: 'Point',
     component: () => import('../views/Point.vue')

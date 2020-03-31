@@ -1,5 +1,5 @@
 <template>
-  <div class="vswitch">
+  <el-card class="vswitch box-card">
     <el-table
             :data="tableData"
             stripe
@@ -10,16 +10,18 @@
               width="180">
       </el-table-column>
       <el-table-column
-              prop="url"
               label="Url"
               width="280">
+        <template slot-scope="scope">
+          <el-link :href="scope.row.url">{{ scope.row.url }}</el-link>
+        </template>
       </el-table-column>
       <el-table-column
               prop="password"
               label="Token">
       </el-table-column>
     </el-table>
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -45,6 +47,5 @@ export default {
 <style scoped>
 .vswitch {
   margin: 0 auto;
-  max-width: 1024px;
 }
 </style>

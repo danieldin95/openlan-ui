@@ -19,11 +19,11 @@ type Config struct {
 }
 
 var cfg = Config{
-	StaticDir: "static",
+	StaticDir: "../dist",
 	CrtDir:    "ca",
 	ConfDir:   "/etc/openlan-ui",
 	Listen:    "0.0.0.0:10088",
-	LogFile:   "/var/log/lightstar.log",
+	LogFile:   "/var/log/openlan-ui.log",
 	Verbose:   2,
 }
 
@@ -31,7 +31,7 @@ func main() {
 	flag.StringVar(&cfg.Listen, "listen", cfg.Listen, "the address http listen.")
 	flag.IntVar(&cfg.Verbose, "log:level", cfg.Verbose, "logger level")
 	flag.StringVar(&cfg.CrtDir, "crt:dir", cfg.CrtDir, "the directory X509 certificate file on.")
-	flag.StringVar(&cfg.StaticDir, "static:dir", cfg.StaticDir, "the directory to serve files from.")
+	flag.StringVar(&cfg.StaticDir, "dist:dir", cfg.StaticDir, "the dist directory.")
 	flag.StringVar(&cfg.ConfDir, "conf", cfg.ConfDir, "the directory configuration on")
 	flag.Parse()
 

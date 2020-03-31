@@ -1,7 +1,16 @@
 <template>
-  <div class="home">
-    <VSwitchList/>
-  </div>
+  <el-container>
+    <el-header>
+      <el-card class="box-card">
+        <span style="font-size: smaller;">Dashboard</span>
+      </el-card>
+    </el-header>
+    <el-main>
+      <div class="home">
+        <VSwitchList/>
+      </div>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
@@ -14,3 +23,6 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+</style>
