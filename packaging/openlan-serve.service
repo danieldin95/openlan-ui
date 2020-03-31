@@ -1,5 +1,5 @@
 [Unit]
-Description=OpenLAN Serve daemon
+Description=OpenLAN Server daemon
 After=network.target
 
 [Service]

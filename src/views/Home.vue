@@ -1,28 +1,43 @@
 <template>
   <el-container>
     <el-header>
-      <el-card class="box-card">
+      <el-card class="box-card" shadow="hover">
         <span style="font-size: smaller;">Dashboard</span>
       </el-card>
     </el-header>
     <el-main>
-      <div class="home">
-        <VSwitchList/>
-      </div>
+      <Dashboard/>
     </el-main>
   </el-container>
 </template>
 
 <script>
-import VSwitchList from "../components/VSwitchList";
+import Dashboard from "../components/Dashboard";
 
 export default {
   name: 'Home',
   components: {
-    VSwitchList,
+    Dashboard,
   }
 };
 </script>
 
 <style scoped>
+  .el-header {
+    overflow: visible;
+    margin-bottom: 10px;
+  }
+
+  .el-header .el-card {
+    min-width: 650px;
+  }
+
+  .el-main {
+    overflow: visible;
+  }
+
+  .el-main .el-card {
+    min-height: 500px;
+    min-width: 650px;
+  }
 </style>

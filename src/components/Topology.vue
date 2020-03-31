@@ -1,5 +1,5 @@
 <template>
-  <el-card class="topology box-card">
+  <el-card class="box-card" body-style="padding: 0;">
     <ECharts :theme="theme" :options="options" :autoresize="true"></ECharts>
   </el-card>
 </template>
@@ -56,13 +56,9 @@ export default {
 </script>
 
 <style scoped>
-.topology {
-  margin: 0 auto;
-}
-
-.echarts {
-  width: 100%;
-  min-width: 1024px;
-  min-height: 500px;
-}
+  .echarts {
+    width: 100%;
+    min-width: 600px;
+    min-height: 500px;
+  }
 </style>

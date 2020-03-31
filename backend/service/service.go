@@ -12,7 +12,7 @@ type Service struct {
 
 var SERVICE = Service{
 	Users: Users{
-		Users: make(map[string]*schema.VSwitch, 32),
+		Users: make(map[string]*schema.User, 32),
 	},
 	VSwitch: VSwitch{
 		VSwitch: make(map[string]*schema.VSwitch, 32),

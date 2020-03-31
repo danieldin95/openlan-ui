@@ -9,7 +9,7 @@ import (
 type Users struct {
 	Lock  sync.RWMutex
 	File  string
-	Users map[string]*schema.VSwitch `json:"user"`
+	Users map[string]*schema.User `json:"user"`
 }
 
 func (u *Users) Save() error {
@@ -41,19 +41,19 @@ func (u *Users) Load(file string) error {
 	return nil
 }
 
-func (u *Users) Get(name string) (schema.VSwitch, bool) {
+func (u *Users) Get(name string) (schema.User, bool) {
 	u.Lock.RLock()
 	defer u.Lock.RUnlock()
 
 	user, ok := u.Users[name]
 	if user == nil {
-		return schema.VSwitch{}, false
+		return schema.User{}, false
 	}
 	return *user, ok
 }
 
-func (u *Users) List() <-chan *schema.VSwitch {
-	c := make(chan *schema.VSwitch, 128)
+func (u *Users) List() <-chan *schema.User {
+	c := make(chan *schema.User, 128)
 	go func() {
 		u.Lock.RLock()
 		defer u.Lock.RUnlock()

@@ -16,7 +16,7 @@ func (u User) Router(router *mux.Router) {
 }
 
 func (u User) GET(w http.ResponseWriter, r *http.Request) {
-	us := make([]schema.VSwitch, 0, 32)
+	us := make([]schema.User, 0, 32)
 	for h := range service.SERVICE.Users.List() {
 		if h == nil {
 			break

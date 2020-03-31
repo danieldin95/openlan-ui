@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/danieldin95/lightstar/libstar"
 	"github.com/danieldin95/openlan-ui/backend/http/api"
+	"github.com/danieldin95/openlan-ui/backend/service"
 	"github.com/gorilla/mux"
 	"net/http"
 	"net/url"
@@ -71,18 +72,21 @@ func (h *Server) Initialize() {
 }
 
 func (h *Server) IsAuth(w http.ResponseWriter, r *http.Request) bool {
-	token, pass, ok := r.BasicAuth()
-	libstar.Debug("Server.IsAuth token: %s, pass: %s", token, pass)
-	if !ok || token != h.token {
-		w.Header().Set("WWW-Authenticate", "Basic")
-		http.Error(w, "Authorization Required.", http.StatusUnauthorized)
+	name, pass, _ := api.GetAuth(r)
+	libstar.Print("Server.IsAuth %s:%s", name, pass)
+
+	user, ok := service.SERVICE.Users.Get(name)
+	if !ok || user.Password != pass {
 		return false
 	}
 	return true
 }
 
 func (h *Server) LogRequest(r *http.Request) {
-	if strings.HasPrefix(r.URL.Path, "/static") ||
+	if strings.HasPrefix(r.URL.Path, "/js") ||
+		strings.HasPrefix(r.URL.Path, "/css") ||
+		strings.HasPrefix(r.URL.Path, "/dist") ||
+		strings.HasPrefix(r.URL.Path, "/fonts") ||
 		strings.HasSuffix(r.URL.Path, ".ico") ||
 		strings.HasSuffix(r.URL.Path, ".png") ||
 		strings.HasSuffix(r.URL.Path, ".gif") {
@@ -102,6 +106,7 @@ func (h *Server) Middleware(next http.Handler) http.Handler {
 			next.ServeHTTP(w, r)
 		} else {
 			w.Header().Set("WWW-Authenticate", "Basic")
+			http.Error(w, "Authorization Required.", http.StatusUnauthorized)
 		}
 	})
 }

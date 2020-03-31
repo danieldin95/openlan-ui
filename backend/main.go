@@ -19,11 +19,11 @@ type Config struct {
 }
 
 var cfg = Config{
-	StaticDir: "../dist",
+	StaticDir: "dist",
 	CrtDir:    "ca",
-	ConfDir:   "/etc/openlan-ui",
+	ConfDir:   "/etc/openlan-serve",
 	Listen:    "0.0.0.0:10088",
-	LogFile:   "/var/log/openlan-ui.log",
+	LogFile:   "/var/log/openlan-serve.log",
 	Verbose:   2,
 }
 

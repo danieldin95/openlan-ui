@@ -1,5 +1,5 @@
 <template>
-  <el-card class="vswitch box-card">
+  <el-card class="box-card">
     <el-table
             :data="tableData"
             stripe
@@ -45,7 +45,4 @@ export default {
 </script>
 
 <style scoped>
-.vswitch {
-  margin: 0 auto;
-}
 </style>

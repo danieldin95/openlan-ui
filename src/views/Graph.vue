@@ -1,14 +1,12 @@
 <template>
   <el-container>
     <el-header>
-      <el-card class="box-card">
+      <el-card class="box-card" shadow="hover">
         <span style="font-size: smaller;">Topology</span>
       </el-card>
     </el-header>
     <el-main>
-      <div class="graph">
-        <Topology/>
-      </div>
+      <Topology/>
     </el-main>
   </el-container>
 </template>
@@ -24,4 +22,21 @@ export default {
 </script>
 
 <style scoped>
+  .el-header {
+    overflow: visible;
+    margin-bottom: 10px;
+  }
+
+  .el-header .el-card {
+    min-width: 650px;
+  }
+
+  .el-main {
+    overflow: visible;
+  }
+
+  .el-main .el-card {
+    min-height: 500px;
+    min-width: 650px;
+  }
 </style>

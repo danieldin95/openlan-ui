@@ -1,10 +1,15 @@
 package api
 
 import (
+	"encoding/base64"
 	"encoding/json"
+	"github.com/danieldin95/lightstar/libstar"
+	"github.com/danieldin95/openlan-ui/backend/schema"
+	"github.com/danieldin95/openlan-ui/backend/service"
 	"github.com/gorilla/mux"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
 func GetArg(r *http.Request, name string) (string, bool) {
@@ -57,4 +62,32 @@ func ResponseMsg(w http.ResponseWriter, code int, message string) {
 		Message: message,
 	}
 	ResponseJson(w, ret)
+}
+
+func GetAuth(req *http.Request) (name, pass string, ok bool) {
+	if t, err := req.Cookie("serve-token-jhx"); err == nil {
+		name, pass, ok = ParseBasicAuth(t.Value)
+	} else {
+		name, pass, ok = req.BasicAuth()
+	}
+	return name, pass, ok
+}
+
+func GetUser(req *http.Request) (schema.User, bool) {
+	name, _, _ := GetAuth(req)
+	libstar.Debug("GetUser %s", name)
+	return service.SERVICE.Users.Get(name)
+}
+
+func ParseBasicAuth(auth string) (username, password string, ok bool) {
+	c, err := base64.StdEncoding.DecodeString(auth)
+	if err != nil {
+		return
+	}
+	cs := string(c)
+	s := strings.IndexByte(cs, ':')
+	if s < 0 {
+		return
+	}
+	return cs[:s], cs[s+1:], true
 }
