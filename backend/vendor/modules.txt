@@ -1,4 +1,4 @@
-# github.com/danieldin95/lightstar v0.0.0-20200401133209-943b8f7f5c02
+# github.com/danieldin95/lightstar v0.0.0-20200401145448-034e11afcf81
 github.com/danieldin95/lightstar/libstar
 # github.com/gorilla/mux v1.7.4
 github.com/gorilla/mux

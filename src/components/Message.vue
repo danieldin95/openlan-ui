@@ -2,12 +2,15 @@
   <el-card class="box-card">
     <el-table
             :data="table"
-            style="width: 100%; font-size: smaller;"
+            style="width: 100%;"
             :row-class-name="rowClassName">
       <el-table-column
+              type="index">
+      </el-table-column>
+      <el-table-column
               prop="date"
-              label="Time"
-              width="200">
+              label="Date"
+              width="180">
       </el-table-column>
       <el-table-column
               prop="level"

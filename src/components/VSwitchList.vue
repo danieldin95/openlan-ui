@@ -5,6 +5,9 @@
             stripe
             style="width: 100%">
       <el-table-column
+              type="index">
+      </el-table-column>
+      <el-table-column
               prop="name"
               label="Name"
               width="180">
@@ -13,7 +16,9 @@
               label="Url"
               width="280">
         <template slot-scope="scope">
-          <el-link :href="scope.row.url">{{ scope.row.url }}</el-link>
+          <el-link :href="scope.row.url">
+            {{ scope.row.url }}
+          </el-link>
         </template>
       </el-table-column>
       <el-table-column

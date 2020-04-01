@@ -4,12 +4,16 @@
             :data="table"
             stripe
             style="width: 100%"
-            :default-sort = "{prop: 'uptime', order: 'ascending'}">
+            :default-sort = "{prop: 'switch', order: 'ascending'}">
       <el-table-column
-              prop="uptime"
-              label="UpTime"
-              sortable
+              type="index">
+      </el-table-column>
+      <el-table-column
+              label="Uptime"
               width="100">
+        <template slot-scope="scope">
+          <span>{{ prettyTime(scope.row.uptime) }}</span>
+        </template>
       </el-table-column>
       <el-table-column
               prop="alias"
@@ -17,15 +21,15 @@
               width="200">
       </el-table-column>
       <el-table-column
+              sortable
               prop="switch"
               label="Switch"
-              sortable
               width="200">
       </el-table-column>
       <el-table-column
+              sortable
               prop="tenant"
               label="Tenant"
-              sortable
               width="100">
       </el-table-column>
       <el-table-column
@@ -51,6 +55,20 @@ import axios from "axios";
 
 export default {
   name: 'PointList',
+  methods: {
+    prettyTime(second) {
+      let min = (second / 60).toFixed(0);
+      if (min < 60) {
+        return min + "m" + (second % 60) + "s";
+      }
+      let hour = (min / 60).toFixed(0);
+      if (hour < 24) {
+        return hour + "h" + (min % 60) + "m";
+      }
+      let day = (hour / 24).toFixed(0);
+      return day + "d" + (hour % 24) + "h";
+    }
+  },
   data() {
     return {
       table: [],

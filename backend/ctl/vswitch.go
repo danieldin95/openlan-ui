@@ -72,6 +72,7 @@ func (v *VSwitch) Once() error {
 		return err
 	}
 	libstar.Debug("VSwitch.Once %s", v.Neighbors)
+	v.State = ""
 
 	return nil
 }
