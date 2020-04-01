@@ -11,7 +11,7 @@
   </el-container>
 </template>
 <script>
-import Topology from "../components/Topology.vue";
+import Topology from "../components/Topology";
 
 export default {
   name: "Graph",
@@ -24,7 +24,6 @@ export default {
 <style scoped>
   .el-header {
     overflow: visible;
-    margin-bottom: 10px;
   }
 
   .el-header .el-card {

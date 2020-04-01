@@ -1,23 +1,28 @@
 <template>
   <div id="app">
     <el-container>
-      <el-aside width="200px">
-        <el-menu default-active="1">
-          <el-menu-item index="1">
+      <el-aside width="auto">
+        <div @click="onButton" :align="'right'">
+          <span style="padding: 22px;">
+            <i :class="iconButton"></i>
+          </span>
+        </div>
+        <el-menu default-active="1" :collapse="collapse" class="el-menu-app" router>
+          <el-menu-item index="/">
             <i class="el-icon-pie-chart"></i>
-            <router-link to="/">Dashboard</router-link>
+            <span slot="title">Dashboard</span>
           </el-menu-item>
-          <el-menu-item index="1">
-            <i class="el-icon-s-home"></i>
-            <router-link to="/vswitch">Virtual switch</router-link>
+          <el-menu-item index="/vswitch">
+            <i class="el-icon-cpu"></i>
+            <span slot="title">Virtual switch</span>
           </el-menu-item>
-          <el-menu-item index="2">
+          <el-menu-item index="/point">
             <i class="el-icon-s-platform"></i>
-            <router-link to="/point">Access point</router-link>
+            <span slot="title">Access point</span>
           </el-menu-item>
-          <el-menu-item index="3">
+          <el-menu-item index="/topo">
             <i class="el-icon-s-marketing"></i>
-            <router-link to="/topo">Topology</router-link>
+            <span slot="title">Topology</span>
           </el-menu-item>
           </el-menu>
       </el-aside>
@@ -28,31 +33,68 @@
 
 <script>
 export default {
+  name: "App",
+  data() {
+    return {
+      collapse: false,
+      iconButton: 'el-icon-d-arrow-left',
+    };
+  },
+  methods: {
+    onButton() {
+      this.collapse = !this.collapse;
+      if (this.collapse) {
+        this.iconButton = 'el-icon-d-arrow-right';
+      } else {
+        this.iconButton = 'el-icon-d-arrow-left';
+      }
+    },
+  }
 };
 </script>
 
-<style scoped>
+<style>
   #app {
     font-family: Arial,sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
+  .el-main .el-card {
+    max-height: 500px;
+    overflow: auto;
+  }
+
+  .el-table .level-error {
+    color: #F56C6C;
+  }
+
+  .el-table .level-warn {
+    color: #E6A23C;
+  }
+
+  .el-table .el-info {
+    color: #303133;
+  }
+</style>
+
+<style scoped>
   .el-aside {
     border-right: solid 1px #e6e6e6;
   }
 
-  .el-menu {
+  .el-menu-app:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
     border-right: none;
+  }
+
+  .el-menu {
     min-height: 600px;
+    border-right: none;
   }
 
-  .el-menu-item a {
+  .el-menu-item span {
     padding: 15px 0;
-    text-decoration-line: none;
-  }
-
-  a.router-link-exact-active {
-    color: #42b983;
   }
 </style>

@@ -16,6 +16,7 @@ type VSwitch struct {
 	Links     []schema.Point
 	Neighbors []schema.Neighbor
 	Auth      libstar.Auth
+	State     string
 }
 
 func (v *VSwitch) Init() {
@@ -87,6 +88,7 @@ func (v *VSwitch) Start() {
 				return
 			case <-v.Ticker.C:
 				if err := v.Once(); err != nil {
+					v.State = err.Error()
 					libstar.Error("VSwitch.Ticker %s %s", v, err)
 				}
 			}

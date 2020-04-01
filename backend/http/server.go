@@ -18,7 +18,6 @@ type Server struct {
 	keyFile string
 	pubDir  string
 	router  *mux.Router
-	token   string
 }
 
 func NewServer(listen, staticDir string) (h *Server) {
@@ -47,6 +46,7 @@ func (h *Server) LoadRouter() {
 	api.Point{}.Router(router)
 	api.Link{}.Router(router)
 	api.Graph{}.Router(router)
+	api.Message{}.Router(router)
 	// static files
 	Dist{h.pubDir}.Router(router)
 }
@@ -57,10 +57,6 @@ func (h *Server) SetCert(keyFile, crtFile string) {
 }
 
 func (h *Server) Initialize() {
-	if h.token == "" {
-		h.token = libstar.GenToken(32)
-	}
-	libstar.Info("Server.Initialize token %s", h.token)
 	r := h.Router()
 	if h.server == nil {
 		h.server = &http.Server{
@@ -83,13 +79,7 @@ func (h *Server) IsAuth(w http.ResponseWriter, r *http.Request) bool {
 }
 
 func (h *Server) LogRequest(r *http.Request) {
-	if strings.HasPrefix(r.URL.Path, "/js") ||
-		strings.HasPrefix(r.URL.Path, "/css") ||
-		strings.HasPrefix(r.URL.Path, "/dist") ||
-		strings.HasPrefix(r.URL.Path, "/fonts") ||
-		strings.HasSuffix(r.URL.Path, ".ico") ||
-		strings.HasSuffix(r.URL.Path, ".png") ||
-		strings.HasSuffix(r.URL.Path, ".gif") {
+	if !strings.HasPrefix(r.URL.Path, "/api") || r.Method == "GET" {
 		return
 	}
 	path := r.URL.Path

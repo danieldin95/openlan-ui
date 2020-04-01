@@ -1,6 +1,7 @@
 package api
 
 import (
+	"github.com/danieldin95/openlan-ui/backend/ctl"
 	"github.com/danieldin95/openlan-ui/backend/schema"
 	"github.com/danieldin95/openlan-ui/backend/service"
 	"github.com/gorilla/mux"
@@ -20,6 +21,9 @@ func (z VSwitch) GET(w http.ResponseWriter, r *http.Request) {
 	for h := range service.SERVICE.VSwitch.List() {
 		if h == nil {
 			break
+		}
+		if vc, ok := h.Ctl.(*ctl.VSwitch); ok {
+			h.State = vc.State
 		}
 		vs = append(vs, *h)
 	}

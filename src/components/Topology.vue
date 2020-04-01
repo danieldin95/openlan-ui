@@ -19,7 +19,7 @@ export default {
       theme: 'dark',
     };
   },
-  created() {
+  mounted() {
     axios.get('/api/graph/default').then((response) => {
       let webkit = response.data;
       this.options = {

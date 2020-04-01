@@ -1,5 +1,5 @@
 Name: openlan-serve
-Version: 0.0.2
+Version: 0.0.3
 Release: 1%{?dist}
 Summary: OpenLan's Server Software
 Group: Applications/Communications

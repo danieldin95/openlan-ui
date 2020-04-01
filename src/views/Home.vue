@@ -7,16 +7,19 @@
     </el-header>
     <el-main>
       <Dashboard/>
+      <Message/>
     </el-main>
   </el-container>
 </template>
 
 <script>
 import Dashboard from "../components/Dashboard";
+import Message from "../components/Message";
 
 export default {
   name: 'Home',
   components: {
+    Message,
     Dashboard,
   }
 };
@@ -25,7 +28,6 @@ export default {
 <style scoped>
   .el-header {
     overflow: visible;
-    margin-bottom: 10px;
   }
 
   .el-header .el-card {
@@ -37,7 +39,7 @@ export default {
   }
 
   .el-main .el-card {
-    min-height: 500px;
     min-width: 650px;
+    margin-bottom: 15px;
   }
 </style>

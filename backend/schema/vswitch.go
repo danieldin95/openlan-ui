@@ -8,6 +8,7 @@ type VSwitch struct {
 	Schema   string      `json:"schema"`
 	Address  string      `json:"address"`
 	Password string      `json:"password"`
+	State    string      `json:"state"`
 	Ctl      interface{} `json:"-"`
 }
 

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import PointList from '../components/PointList.vue';
+import PointList from '../components/PointList';
 
 export default {
   name: 'Point',
@@ -32,7 +32,6 @@ export default {
 <style scoped>
   .el-header {
     overflow: visible;
-    margin-bottom: 10px;
   }
 
   .el-header .el-card {

@@ -1,7 +1,7 @@
 <template>
   <el-card class="box-card">
     <el-table
-            :data="tableData"
+            :data="table"
             stripe
             style="width: 100%"
             :default-sort = "{prop: 'uptime', order: 'ascending'}">
@@ -53,12 +53,12 @@ export default {
   name: 'PointList',
   data() {
     return {
-      tableData: [],
+      table: [],
     };
   },
-  created() {
+  mounted() {
     axios.get("/api/point").then((resp) => {
-      this.tableData = resp.data;
+      this.table = resp.data;
     }).catch((error) => {
       console.log(`GET /api/point: ${error}`);
     });
