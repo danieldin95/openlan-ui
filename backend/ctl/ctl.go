@@ -1,7 +1,7 @@
 package ctl
 
 import (
-	"github.com/danieldin95/openlan-ui/backend/service"
+	"github.com/danieldin95/openlan-ui/backend/storage"
 	"sync"
 )
 
@@ -10,7 +10,7 @@ type Ctl struct {
 	VSwitch map[string]*VSwitch
 }
 
-func (c *Ctl) Load(srv *service.Service) {
+func (c *Ctl) Load(srv *storage.Storage) {
 	c.Lock.Lock()
 	defer c.Lock.Unlock()
 

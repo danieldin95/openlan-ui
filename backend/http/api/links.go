@@ -3,7 +3,7 @@ package api
 import (
 	"github.com/danieldin95/openlan-ui/backend/ctl"
 	"github.com/danieldin95/openlan-ui/backend/schema"
-	"github.com/danieldin95/openlan-ui/backend/service"
+	"github.com/danieldin95/openlan-ui/backend/storage"
 	"github.com/gorilla/mux"
 	"net/http"
 	"sort"
@@ -18,7 +18,7 @@ func (l Link) Router(router *mux.Router) {
 
 func (l Link) GET(w http.ResponseWriter, r *http.Request) {
 	id, _ := GetArg(r, "id")
-	vs, ok := service.SERVICE.VSwitch.Get(id)
+	vs, ok := storage.Storager.VSwitch.Get(id)
 	if !ok {
 		http.Error(w, "not found", http.StatusNotFound)
 		return

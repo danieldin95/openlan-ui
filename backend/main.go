@@ -5,7 +5,7 @@ import (
 	"github.com/danieldin95/lightstar/libstar"
 	"github.com/danieldin95/openlan-ui/backend/ctl"
 	"github.com/danieldin95/openlan-ui/backend/http"
-	"github.com/danieldin95/openlan-ui/backend/service"
+	"github.com/danieldin95/openlan-ui/backend/storage"
 	"os"
 )
 
@@ -36,8 +36,8 @@ func main() {
 	flag.Parse()
 
 	libstar.Init(cfg.LogFile, cfg.Verbose)
-	service.SERVICE.Load(cfg.ConfDir)
-	ctl.CTL.Load(&service.SERVICE)
+	storage.Storager.Load(cfg.ConfDir)
+	ctl.CTL.Load(&storage.Storager)
 
 	h := http.NewServer(cfg.Listen, cfg.StaticDir)
 	if _, err := os.Stat(cfg.CrtDir); !os.IsNotExist(err) {

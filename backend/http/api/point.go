@@ -3,7 +3,7 @@ package api
 import (
 	"github.com/danieldin95/openlan-ui/backend/ctl"
 	"github.com/danieldin95/openlan-ui/backend/schema"
-	"github.com/danieldin95/openlan-ui/backend/service"
+	"github.com/danieldin95/openlan-ui/backend/storage"
 	"github.com/gorilla/mux"
 	"net/http"
 )
@@ -20,7 +20,7 @@ func (p Point) GET(w http.ResponseWriter, r *http.Request) {
 	id, _ := GetArg(r, "id")
 	ps := make([]schema.Point, 0, 32)
 	if id == "" {
-		for vs := range service.SERVICE.VSwitch.List() {
+		for vs := range storage.Storager.VSwitch.List() {
 			if vs == nil {
 				break
 			}
@@ -35,7 +35,7 @@ func (p Point) GET(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	} else {
-		vs, ok := service.SERVICE.VSwitch.Get(id)
+		vs, ok := storage.Storager.VSwitch.Get(id)
 		if !ok {
 			http.Error(w, "switch not found", http.StatusNotFound)
 			return

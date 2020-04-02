@@ -2,7 +2,7 @@ package api
 
 import (
 	"github.com/danieldin95/openlan-ui/backend/schema"
-	"github.com/danieldin95/openlan-ui/backend/service"
+	"github.com/danieldin95/openlan-ui/backend/storage"
 	"github.com/gorilla/mux"
 	"net/http"
 	"sort"
@@ -17,7 +17,7 @@ func (u User) Router(router *mux.Router) {
 
 func (u User) GET(w http.ResponseWriter, r *http.Request) {
 	us := make([]schema.User, 0, 32)
-	for h := range service.SERVICE.Users.List() {
+	for h := range storage.Storager.Users.List() {
 		if h == nil {
 			break
 		}

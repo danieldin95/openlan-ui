@@ -3,7 +3,7 @@ package api
 import (
 	"github.com/danieldin95/openlan-ui/backend/ctl"
 	"github.com/danieldin95/openlan-ui/backend/schema"
-	"github.com/danieldin95/openlan-ui/backend/service"
+	"github.com/danieldin95/openlan-ui/backend/storage"
 	"github.com/gorilla/mux"
 	"net/http"
 	"sort"
@@ -18,7 +18,7 @@ func (z VSwitch) Router(router *mux.Router) {
 
 func (z VSwitch) GET(w http.ResponseWriter, r *http.Request) {
 	vs := make([]schema.VSwitch, 0, 32)
-	for h := range service.SERVICE.VSwitch.List() {
+	for h := range storage.Storager.VSwitch.List() {
 		if h == nil {
 			break
 		}

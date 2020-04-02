@@ -3,7 +3,7 @@ package api
 import (
 	"github.com/danieldin95/openlan-ui/backend/ctl"
 	"github.com/danieldin95/openlan-ui/backend/schema"
-	"github.com/danieldin95/openlan-ui/backend/service"
+	"github.com/danieldin95/openlan-ui/backend/storage"
 	"github.com/gorilla/mux"
 	"net/http"
 )
@@ -36,7 +36,7 @@ func (g Graph) GET(w http.ResponseWriter, r *http.Request) {
 
 	i := 0
 	idx := make(map[string]*schema.Node, 32)
-	for vs := range service.SERVICE.VSwitch.List() {
+	for vs := range storage.Storager.VSwitch.List() {
 		if vs == nil {
 			break
 		}
@@ -50,7 +50,7 @@ func (g Graph) GET(w http.ResponseWriter, r *http.Request) {
 		gs.Nodes = append(gs.Nodes, node)
 		i += 1
 	}
-	for vs := range service.SERVICE.VSwitch.List() {
+	for vs := range storage.Storager.VSwitch.List() {
 		if vs == nil {
 			break
 		}

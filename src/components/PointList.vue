@@ -57,16 +57,16 @@ export default {
   name: 'PointList',
   methods: {
     prettyTime(second) {
-      let min = (second / 60).toFixed(0);
+      let min = (second / 60).toFixed();
       if (min < 60) {
-        return min + "m" + (second % 60) + "s";
+        return min + "m" + (second % 60);
       }
-      let hour = (min / 60).toFixed(0);
+      let hour = (min / 60).toFixed();
       if (hour < 24) {
-        return hour + "h" + (min % 60) + "m";
+        return hour + "h" + (min % 60);
       }
-      let day = (hour / 24).toFixed(0);
-      return day + "d" + (hour % 24) + "h";
+      let day = (hour / 24).toFixed();
+      return day + "d" + (hour % 24);
     }
   },
   data() {

@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/danieldin95/lightstar/libstar"
 	"github.com/danieldin95/openlan-ui/backend/http/api"
-	"github.com/danieldin95/openlan-ui/backend/service"
+	"github.com/danieldin95/openlan-ui/backend/storage"
 	"github.com/gorilla/mux"
 	"net/http"
 	"net/url"
@@ -71,7 +71,7 @@ func (h *Server) IsAuth(w http.ResponseWriter, r *http.Request) bool {
 	name, pass, _ := api.GetAuth(r)
 	libstar.Print("Server.IsAuth %s:%s", name, pass)
 
-	user, ok := service.SERVICE.Users.Get(name)
+	user, ok := storage.Storager.Users.Get(name)
 	if !ok || user.Password != pass {
 		return false
 	}

@@ -18,7 +18,7 @@ cd %_source_dir && make all
 
 %install
 mkdir -p %{buildroot}/usr/bin
-cp %_source_dir/backend/serve %{buildroot}/usr/bin/openlan-serve
+cp %_source_dir/backend/serve.bin %{buildroot}/usr/bin/openlan-serve
 
 mkdir -p %{buildroot}/etc/sysconfig
 cp %_source_dir/packaging/serve.cfg %{buildroot}/etc/sysconfig/openlan-serve.cfg

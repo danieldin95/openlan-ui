@@ -1,16 +1,16 @@
-package service
+package storage
 
 import (
 	"github.com/danieldin95/lightstar/libstar"
 	"github.com/danieldin95/openlan-ui/backend/schema"
 )
 
-type Service struct {
+type Storage struct {
 	Users   Users
 	VSwitch VSwitch
 }
 
-var SERVICE = Service{
+var Storager = Storage{
 	Users: Users{
 		Users: make(map[string]*schema.User, 32),
 	},
@@ -19,13 +19,13 @@ var SERVICE = Service{
 	},
 }
 
-func (s *Service) Load(path string) {
+func (s *Storage) Load(path string) {
 	if err := s.Users.Load(path + "/auth.json"); err != nil {
-		libstar.Error("Service.Load.Users %s", err)
+		libstar.Error("Storage.Load.Users %s", err)
 	}
-	libstar.Debug("Service.Load %s", s.Users)
+	libstar.Debug("Storage.Load %s", s.Users)
 	if err := s.VSwitch.Load(path + "/vswitch.json"); err != nil {
-		libstar.Error("Service.Load.VSwitch %s", err)
+		libstar.Error("Storage.Load.VSwitch %s", err)
 	}
-	libstar.Debug("Service.Load %s", s.VSwitch)
+	libstar.Debug("Storage.Load %s", s.VSwitch)
 }

@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"github.com/danieldin95/lightstar/libstar"
 	"github.com/danieldin95/openlan-ui/backend/schema"
-	"github.com/danieldin95/openlan-ui/backend/service"
+	"github.com/danieldin95/openlan-ui/backend/storage"
 	"github.com/gorilla/mux"
 	"io/ioutil"
 	"net/http"
@@ -76,7 +76,7 @@ func GetAuth(req *http.Request) (name, pass string, ok bool) {
 func GetUser(req *http.Request) (schema.User, bool) {
 	name, _, _ := GetAuth(req)
 	libstar.Debug("GetUser %s", name)
-	return service.SERVICE.Users.Get(name)
+	return storage.Storager.Users.Get(name)
 }
 
 func ParseBasicAuth(auth string) (username, password string, ok bool) {

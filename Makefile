@@ -11,7 +11,7 @@ all: serve dist
 
 
 serve:
-	cd backend && go build -mod=vendor -ldflags "$(LDFLAGS)" -o serve main.go
+	cd backend && go build -mod=vendor -ldflags "$(LDFLAGS)" -o serve.bin main.go
 
 
 dist:
