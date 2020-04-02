@@ -52,7 +52,7 @@ export default {
   name: "Dashboard",
   components: {
   },
-  data() {
+  data: function() {
     return {
       point: {
         total: 0,
@@ -74,7 +74,7 @@ export default {
       ]
     };
   },
-  mounted() {
+  mounted: function() {
     axios.get("/api/point").then((resp) => {
       this.point.total = resp.data.length;
       this.point.success = resp.data.filter((e) => e.state === 'authenticated').length;

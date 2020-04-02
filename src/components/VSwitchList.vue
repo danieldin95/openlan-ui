@@ -34,12 +34,12 @@ import axios from "axios";
 
 export default {
   name: 'VSwitchList',
-  data() {
+  data: function() {
     return {
       table: [],
     };
   },
-  mounted() {
+  mounted: function() {
     axios.get("/api/vswitch").then((resp) => {
       this.table = resp.data;
     }).catch((error) => {

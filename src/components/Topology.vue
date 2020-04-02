@@ -13,13 +13,13 @@ export default {
   components: {
     ECharts,
   },
-  data () {
+  data: function() {
     return {
       options: {},
       theme: 'dark',
     };
   },
-  mounted() {
+  mounted: function() {
     axios.get('/api/graph/default').then((response) => {
       let webkit = response.data;
       this.options = {

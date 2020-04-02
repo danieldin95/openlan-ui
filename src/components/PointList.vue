@@ -69,12 +69,12 @@ export default {
       return day + "d" + (hour % 24);
     }
   },
-  data() {
+  data: function() {
     return {
       table: [],
     };
   },
-  mounted() {
+  mounted: function() {
     axios.get("/api/point").then((resp) => {
       this.table = resp.data;
     }).catch((error) => {

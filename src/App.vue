@@ -36,8 +36,8 @@ export default {
   name: "App",
   data() {
     return {
-      collapse: false,
-      iconButton: 'el-icon-d-arrow-left',
+      collapse: true,
+      iconButton: 'el-icon-d-arrow-right',
     };
   },
   methods: {

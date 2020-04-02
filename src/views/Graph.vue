@@ -3,10 +3,13 @@
     <el-header>
       <el-card class="box-card" shadow="hover">
         <span style="font-size: smaller;">Topology</span>
+        <div style="float: right;">
+          <i class="el-icon-refresh" @click="refresh"></i>
+        </div>
       </el-card>
     </el-header>
     <el-main>
-      <Topology/>
+      <Topology :key="key"/>
     </el-main>
   </el-container>
 </template>
@@ -17,6 +20,16 @@ export default {
   name: "Graph",
   components: {
     Topology
+  },
+  methods: {
+    refresh() {
+      this.key += 1;
+    }
+  },
+  data: function() {
+    return {
+      key: 0,
+    };
   },
 };
 </script>

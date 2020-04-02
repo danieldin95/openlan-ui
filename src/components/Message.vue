@@ -36,12 +36,12 @@ export default {
       return 'level-' + row.level.toLowerCase();
     },
   },
-  data() {
+  data: function() {
     return {
       table: [],
     };
   },
-  mounted() {
+  mounted: function() {
     axios.get("/api/message?size=64").then((resp) => {
       this.table = resp.data;
     }).catch((error) => {

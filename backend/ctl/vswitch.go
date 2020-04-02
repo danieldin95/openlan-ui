@@ -80,17 +80,16 @@ func (v *VSwitch) Once() error {
 func (v *VSwitch) Start() {
 	libstar.Info("VSwitch.Start %s", v)
 	go func() {
-		if err := v.Once(); err != nil {
-			libstar.Error("VSwitch.Ticker %s %s", v, err)
-		}
 		for {
 			select {
 			case <-v.Done:
 				return
 			case <-v.Ticker.C:
 				if err := v.Once(); err != nil {
-					v.State = err.Error()
-					libstar.Error("VSwitch.Ticker %s %s", v, err)
+					if v.State != err.Error() {
+						v.State = err.Error()
+						libstar.Error("VSwitch.Ticker %s %s", v, err)
+					}
 				}
 			}
 		}
