@@ -4,14 +4,14 @@
       <el-col :xs="24" :sm="12" :md="8" :lg="6">
         <div class="card">
           <div class="value">
-            <el-row>
-              <el-col :span="8" style="padding: 5px;">
+            <el-row type="flex" justify="center">
+              <el-col :span="10" style="padding: 10px 5px;">
                 <div class="title">Total</div>
                 <div class="info">{{point.total}}</div>
                 <div class="title">Success</div>
                 <div class="success">{{point.success}}</div>
               </el-col>
-              <el-col :span="16" style="">
+              <el-col :span="14" style="">
                 <el-progress type="circle" :width="100"
                              :percentage="point.percentage" :color="colors">
                 </el-progress>
@@ -24,14 +24,14 @@
       <el-col :xs="24" :sm="12" :md="8" :lg="6">
         <div class="card">
           <div class="value">
-            <el-row>
-              <el-col :span="8" style="padding: 5px;">
+            <el-row type="flex" justify="center">
+              <el-col :span="10" style="padding: 10px 5px;">
                 <div class="title">Total</div>
                 <div class="info">{{vswitch.total}}</div>
                 <div class="title">Success</div>
                 <div class="success">{{vswitch.success}}</div>
               </el-col>
-              <el-col :span="16" style="">
+              <el-col :span="14" style="">
                 <el-progress type="circle" :width="100"
                              :percentage="vswitch.percentage" :color="colors">
                 </el-progress>
@@ -101,9 +101,11 @@ export default {
 <style scoped>
   .card {
     background: #fbfcfd;
-    height: 180px;
+    min-height: 180px;
     text-align: center;
     padding: 15px;
+    margin: 5px 0;
+    border-radius: 5px;
   }
 
   .card .label {

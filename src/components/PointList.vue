@@ -28,8 +28,8 @@
       </el-table-column>
       <el-table-column
               sortable
-              prop="tenant"
-              label="Tenant"
+              prop="network"
+              label="Network"
               width="100">
       </el-table-column>
       <el-table-column
