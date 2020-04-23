@@ -18,8 +18,8 @@ cd %_source_dir && make all
 
 %install
 
-mkdir -p %{buildroot}/var/openlan/ui/dist
-cp -R %_source_dir/dist %{buildroot}/var/openlan/ui/dist
+mkdir -p %{buildroot}/var/openlan/ui
+cp -R %_source_dir/dist %{buildroot}/var/openlan/ui
 
 %files
 %defattr(-,root,root)

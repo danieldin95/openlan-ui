@@ -8,22 +8,25 @@
               type="index">
       </el-table-column>
       <el-table-column
-              prop="name"
+          prop="uuid"
+          label="UUID"
+          width="280">
+      </el-table-column>
+      <el-table-column
+              prop="alias"
               label="Name"
               width="180">
       </el-table-column>
       <el-table-column
-              label="Url"
-              width="280">
-        <template slot-scope="scope">
-          <el-link :href="scope.row.url">
-            {{ scope.row.url }}
-          </el-link>
-        </template>
+              prop="uptime"
+              label="UpTime"
+              width="100">
       </el-table-column>
       <el-table-column
-              prop="password"
-              label="Token">
+          label="Address">
+        <template slot-scope="scope">
+          <el-link :href="link(scope.row.address)">{{ scope.row.address }}</el-link>
+        </template>
       </el-table-column>
     </el-table>
   </el-card>
@@ -38,6 +41,11 @@ export default {
     return {
       table: [],
     };
+  },
+  methods: {
+    link: function (address) {
+      return "https://"+address.split(":")[0]+":10000";
+    }
   },
   mounted: function() {
     axios.get("/api/vswitch").then((resp) => {
