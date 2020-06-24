@@ -44,7 +44,8 @@
       </el-table-column>
       <el-table-column
               prop="state"
-              label="State">
+              label="State"
+              min-width="120">
       </el-table-column>
     </el-table>
   </el-card>

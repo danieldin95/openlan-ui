@@ -87,7 +87,7 @@ export default {
 
     axios.get("/api/vswitch").then((resp) => {
       this.vswitch.total = resp.data.length;
-      this.vswitch.success = resp.data.filter((e) => e.state === '').length;
+      this.vswitch.success = resp.data.filter((e) => e.state !== '').length;
       if (this.vswitch.total > 0) {
         this.vswitch.percentage = this.vswitch.success * 100 / this.vswitch.total;
       }
