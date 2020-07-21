@@ -50,16 +50,16 @@ export default {
       return "https://"+address.split(":")[0]+":10000";
     },
     prettyTime(second) {
-      let min = (second / 60).toFixed();
+      let min = Math.floor(second / 60);
       if (min < 60) {
-        return min + "m" + (second % 60);
+        return min + "m" + (second % 60) + "s";
       }
-      let hour = (min / 60).toFixed();
+      let hour = Math.floor(min / 60);
       if (hour < 24) {
-        return hour + "h" + (min % 60);
+        return hour + "h" + (min % 60) + "s";
       }
-      let day = (hour / 24).toFixed();
-      return day + "d" + (hour % 24);
+      let day = Math.floor(hour / 24);
+      return day + "d" + (hour % 24) + "h";
     }
   },
   mounted: function() {
